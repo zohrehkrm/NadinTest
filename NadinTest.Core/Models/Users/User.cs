@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using NadinTest.Core.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,4 +17,12 @@ namespace NadinTest.Core.Models.Users
         public string UserName { get; set; }
         public string PassWord { get; set; }
     }
+    public class UserConfiguration : IEntityTypeConfiguration<User>
+    {
+        public void Configure(EntityTypeBuilder<User> builder)
+        {
+           builder.HasKey(i => i.Id);
+        }
+    }
+
 }

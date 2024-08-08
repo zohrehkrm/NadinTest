@@ -21,15 +21,14 @@ namespace NadinTest.Core.Models.Base
         public string ManufactureEmail { get; set; }
         public bool IsAvailable { get; set; }
 
-        public class ProductConfiguration : IEntityTypeConfiguration<Product>
+     
+    }
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
+    {
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
-            public void Configure(EntityTypeBuilder<Product> builder)
-            {
-                builder.HasIndex(i => new { i.ProduceDate , i.ManufacturePhone }).IsUnique();
-            }
+            builder.HasIndex(i => new { i.ProduceDate, i.ManufacturePhone }).IsUnique();
+            builder.HasKey(i => i.Id);
         }
-
-
-
     }
 }

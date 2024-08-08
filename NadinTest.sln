@@ -13,6 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{5716
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NadinTest.Core", "NadinTest.Core\NadinTest.Core.csproj", "{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NadinTest.Data", "NadinTest.Data\NadinTest.Data.csproj", "{5D45A766-63DD-482F-861F-B943A15621B8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40} = {47CBFE61-04F7-43C9-AD96-6B1EC10E2D40}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,12 +32,17 @@ Global
 		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D45A766-63DD-482F-861F-B943A15621B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D45A766-63DD-482F-861F-B943A15621B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D45A766-63DD-482F-861F-B943A15621B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D45A766-63DD-482F-861F-B943A15621B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40} = {3DEE9049-602B-40E4-83F3-41C1528BA09C}
+		{5D45A766-63DD-482F-861F-B943A15621B8} = {7EA234E6-65C7-4923-81B1-A52306CC9DC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B7C8958-0908-4345-8384-B0379E3CC5C8}
