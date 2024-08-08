@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NadinTest", "NadinTest\NadinTest.csproj", "{0D025967-F32A-4EDC-889A-E38E9CB8CB11}"
 	ProjectSection(ProjectDependencies) = postProject
-		{5D45A766-63DD-482F-861F-B943A15621B8} = {5D45A766-63DD-482F-861F-B943A15621B8}
+		{B310B243-39E5-4F1C-A966-1B9FB456A9B3} = {B310B243-39E5-4F1C-A966-1B9FB456A9B3}
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3DEE9049-602B-40E4-83F3-41C1528BA09C}"
@@ -19,6 +19,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NadinTest.Data", "NadinTest.Data\NadinTest.Data.csproj", "{5D45A766-63DD-482F-861F-B943A15621B8}"
 	ProjectSection(ProjectDependencies) = postProject
 		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40} = {47CBFE61-04F7-43C9-AD96-6B1EC10E2D40}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NadinTest.Service", "NadinTest.Service\NadinTest.Service.csproj", "{B310B243-39E5-4F1C-A966-1B9FB456A9B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5D45A766-63DD-482F-861F-B943A15621B8} = {5D45A766-63DD-482F-861F-B943A15621B8}
 	EndProjectSection
 EndProject
 Global
@@ -39,6 +44,10 @@ Global
 		{5D45A766-63DD-482F-861F-B943A15621B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D45A766-63DD-482F-861F-B943A15621B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D45A766-63DD-482F-861F-B943A15621B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B310B243-39E5-4F1C-A966-1B9FB456A9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B310B243-39E5-4F1C-A966-1B9FB456A9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B310B243-39E5-4F1C-A966-1B9FB456A9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B310B243-39E5-4F1C-A966-1B9FB456A9B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +55,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{47CBFE61-04F7-43C9-AD96-6B1EC10E2D40} = {3DEE9049-602B-40E4-83F3-41C1528BA09C}
 		{5D45A766-63DD-482F-861F-B943A15621B8} = {7EA234E6-65C7-4923-81B1-A52306CC9DC9}
+		{B310B243-39E5-4F1C-A966-1B9FB456A9B3} = {5716D72E-28AA-4960-9A8A-B2559F63A647}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5B7C8958-0908-4345-8384-B0379E3CC5C8}
