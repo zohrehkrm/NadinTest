@@ -23,8 +23,15 @@ namespace NadinTest.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+
+          
+
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration( new UserConfiguration());
+
+
         }
 
     }
@@ -34,10 +41,10 @@ namespace NadinTest.Data
         {
             var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
 
-            optionBuilder.UseSqlServer(@"");
+            optionBuilder.UseSqlServer("Data Source=.;Initial Catalog=NadinDb;Integrated Security=true ;Trusted_Connection=True;TrustServerCertificate=True;");
 
 
-                return new ApplicationDbContext(optionBuilder.Options);
+            return new ApplicationDbContext(optionBuilder.Options);
         }
 
     }

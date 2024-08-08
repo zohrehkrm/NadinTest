@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NadinTest", "NadinTest\NadinTest.csproj", "{0D025967-F32A-4EDC-889A-E38E9CB8CB11}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5D45A766-63DD-482F-861F-B943A15621B8} = {5D45A766-63DD-482F-861F-B943A15621B8}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{3DEE9049-602B-40E4-83F3-41C1528BA09C}"
 EndProject
