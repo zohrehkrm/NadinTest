@@ -66,6 +66,18 @@ namespace NadinTest.Data.Repositories
             return res;
         }
 
+        public async Task<User> FindByUserName(string UserName)
+        {
+            return DbContext.Users.FirstOrDefault(x => x.UserName == UserName);
+            
+        }
+        public async Task<bool> CheckPasswordAsync(User user , string Pssword)
+        {
+            var res =  DbContext.Users.Any(x => x.UserName == user.UserName && x.PassWord == Pssword);
+            return res;
+            
+        }
+
 
         //public async Task AddAsync(User user, string password, CancellationToken cancellationToken)
         //{

@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.Twitter;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using NadinTest.Core.Infrastructure.Users;
+using NadinTest.Core.JWT;
 using NadinTest.Core.Models.Users;
 using NadinTest.Data.Contracts;
 
@@ -9,11 +12,14 @@ namespace NadinTest.Service.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository repository;
+        private readonly IJwtService jwtService;
+  
 
-        public UserService(IUserRepository repository)
+        public UserService(IUserRepository repository, IJwtService jwtService)
         {
 
             this.repository = repository;
+            this.jwtService = jwtService;
         }
 
         public async Task<User> Add(User user)
@@ -48,14 +54,33 @@ namespace NadinTest.Service.Services
             return res;
         }
 
+
         public async Task<User> CheckPasswordByUserNameAsync(string userName, string password, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var user = await this.FindByNameAsync(userName, cancellationToken);
+            if (user is null)
+                throw new Exception( "نام کاربری یا رمز عبور اشتباه است");
+
+            var isPasswordValid = await repository.CheckPasswordAsync(user, password);
+            if (!isPasswordValid)
+                throw new Exception("نام کاربری یا رمز عبور اشتباه است");
+
+            return user;
         }
 
-        public async Task<AccessToken> CreateToken(string username, string password, CancellationToken cancellationToken)
+
+        public async Task<string> CreateToken(string userName, string password, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var user = await this.CheckPasswordByUserNameAsync(userName, password, cancellationToken);
+            var jwt = await jwtService.GenerateAsync(user);
+            return jwt;
+
+        }
+        public async Task<User> FindByNameAsync(string userName, CancellationToken cancellationToken)
+        {
+
+            var user = await repository.FindByUserName(userName);
+            return user;
         }
 
 
@@ -65,5 +90,6 @@ namespace NadinTest.Service.Services
         {
             throw new NotImplementedException();
         }
+               
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.Twitter;
+﻿
+using NadinTest.Core.JWT;
 using NadinTest.Core.Models.Base;
 using NadinTest.Core.Models.Users;
 using System;
@@ -17,7 +18,7 @@ namespace NadinTest.Core.Infrastructure.Users
         /// <param name="password"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<AccessToken> CreateToken(string username, string password, CancellationToken cancellationToken);
+        Task<string> CreateToken(string username, string password, CancellationToken cancellationToken);
 
 
 

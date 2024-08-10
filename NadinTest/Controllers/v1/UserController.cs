@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.Twitter;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NadinTest.Core.Infrastructure.Base;
 using NadinTest.Core.Infrastructure.Users;
 using NadinTest.Core.Models.Users;
 using NadinTest.Data;
+using NadinTest.Models.Jwt;
 using NadinTest.Service.Services;
 
 namespace NadinTest.Controllers.v1
@@ -20,7 +22,7 @@ namespace NadinTest.Controllers.v1
         }
 
 
-
+        [AllowAnonymous]
         [HttpPost(Name = "PostUser")]
         public async Task<User> Add(User user)
         {
@@ -45,22 +47,25 @@ namespace NadinTest.Controllers.v1
             return await Service.Update(user);
         }
 
-        [HttpDelete(Name = "DeleteProduct")]
+        [HttpDelete(Name = "DeleteUser")]
         public async Task Delete(Guid id)
         {
             await Service.DeleteById(id);
         }
 
-    
-        //[HttpGet(Name = "CreateToken")]
-        //public Task<AccessToken> CreateToken(string username, string password, CancellationToken cancellationToken)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //[HttpGet(Name = "CeckPass")]
-        //public Task<User> CheckPasswordByUserNameAsync(string userName, string password, CancellationToken cancellationToken)
-        //{
-        //    throw new NotImplementedException();
-        //}
+
+
+
+        [AllowAnonymous]
+        [HttpPost("Token")]
+        public virtual async Task<ActionResult> Token( int Token, [FromForm] TokenRequest tokenRequest, CancellationToken cancellationToken)
+        {
+
+            var accessToken = await Service.CreateToken(tokenRequest.username, tokenRequest.password, cancellationToken);
+
+            return new JsonResult(accessToken);
+        }
+
+
     }
 }

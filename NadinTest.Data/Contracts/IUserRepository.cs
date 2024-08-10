@@ -15,5 +15,7 @@ namespace NadinTest.Data.Contracts
         Task<User> GetById(Guid Id);
         Task<User> Update(User user);
         Task Delete(User user);
+        Task<User> FindByUserName(string UserName);
+        Task<bool> CheckPasswordAsync(User user, string Pssword);
     }
 }
