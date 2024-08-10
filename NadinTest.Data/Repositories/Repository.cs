@@ -18,7 +18,7 @@ namespace NadinTest.Data.Repositories
 
         }
 
-        public Product Create(Product product)
+        public async Task<Product> Create(Product product)
         {
             DbContext.Products.Add(product);
             DbContext.SaveChanges();
@@ -26,16 +26,16 @@ namespace NadinTest.Data.Repositories
         
         }
 
-        public void Delete(Product product)
+        public async Task Delete(Product product)
         {
 
-            var res = GetById(product.Id);
+            var res = await GetById(product.Id);
             DbContext.Products.Remove(res);
             DbContext.SaveChanges();
 
         }
 
-        public List<Product> GetAll(Product product)
+        public async Task<List<Product>> GetAll()
         {
             return DbContext.Products
                  .Select(x => new Product
@@ -50,7 +50,7 @@ namespace NadinTest.Data.Repositories
                 .ToList();
         }
 
-        public Product GetById(Guid Id)
+        public async Task<Product> GetById(Guid Id)
         {
             var res = DbContext.Products.FirstOrDefault(x => x.Id == Id);
             if (res == null)
@@ -60,16 +60,19 @@ namespace NadinTest.Data.Repositories
             return res;
         }
 
-        public Product Update(Product product)
+     
+    
+        public async Task<Product> Update(Product product)
         {
-            var res = GetById(product.Id);
+            var res = await GetById(product.Id);
             DbContext.Products.Update(res);
             DbContext.SaveChanges();
             return res;
+          
         }
 
-      
-    }
+     }
+  
 
     
 }

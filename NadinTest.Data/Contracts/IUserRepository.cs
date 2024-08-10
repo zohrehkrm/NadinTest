@@ -10,10 +10,10 @@ namespace NadinTest.Data.Contracts
 {
     public interface IUserRepository
     {
-        User Create(User product);
-        List<User> GetAll(User product);
-        User GetById(User product);
-        User Update(User product);
-        void Delete(User product);
+        Task<User> Create(User user);
+        Task<List<User>> GetAll();
+        Task<User> GetById(Guid Id);
+        Task<User> Update(User user);
+        Task Delete(User user);
     }
 }

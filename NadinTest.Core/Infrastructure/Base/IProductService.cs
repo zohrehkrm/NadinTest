@@ -10,9 +10,10 @@ namespace NadinTest.Core.Infrastructure.Base
 {
     public interface IProductService
     {
-        Product GetById(Guid id);
-        List<Product> GetAll();
-        Guid Add(Product product);
-        Product Update(Guid Id);
+        Task<Product> GetById(Guid id);
+        Task<List<Product>> GetAll();
+        Task<Product> Add(Product product);
+        Task<Product> Update(Product product);
+        Task DeleteById(Guid id);
     }
 }

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NadinTest.Core\NadinTest.Core.csproj" />
+    <ProjectReference Include="..\NadinTest.Data\NadinTest.Data.csproj" />
   </ItemGroup>
 
 </Project>

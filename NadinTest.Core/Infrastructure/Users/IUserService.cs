@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication.Twitter;
+using NadinTest.Core.Models.Base;
 using NadinTest.Core.Models.Users;
 using System;
 using System.Collections.Generic;
@@ -28,5 +29,12 @@ namespace NadinTest.Core.Infrastructure.Users
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<User> CheckPasswordByUserNameAsync(string userName, string password, CancellationToken cancellationToken);
+
+
+       Task<User> GetById(Guid id);
+        Task<List<User>> GetAll();
+        Task<User> Add(User user);
+        Task<User> Update(User user);
+        Task DeleteById(Guid id);
     }
 }

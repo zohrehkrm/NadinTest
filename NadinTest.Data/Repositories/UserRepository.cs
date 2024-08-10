@@ -9,30 +9,32 @@ using System.Threading.Tasks;
 
 namespace NadinTest.Data.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository  : IUserRepository
     {
         protected readonly ApplicationDbContext DbContext;
-        public UserRepository(ApplicationDbContext dbContext)
+        
+        public UserRepository(ApplicationDbContext dbContext )
         {
             DbContext = dbContext;
+           
         }
 
-        public User Create(User user)
+        public async Task<User> Create(User user)
         {
             DbContext.Users.Add(user);
             DbContext.SaveChanges();
             return user;
         }
 
-        public void Delete(User user)
+        public async Task Delete(User user)
         {
-            var res = GetById(user.Id);
+            var res = await GetById(user.Id);
             DbContext.Users.Remove(res);
             DbContext.SaveChanges();
 
         }
 
-        public List<User> GetAll(User product)
+        public async Task<List<User>> GetAll()
         {
             return DbContext.Users
                 .Select(x => new User
@@ -44,7 +46,8 @@ namespace NadinTest.Data.Repositories
                 .ToList();
         }
 
-        public User GetById(Guid Id)
+     
+        public async Task<User> GetById(Guid Id)
         {
             var res = DbContext.Users.FirstOrDefault(x => x.Id == Id);
             if (res == null)
@@ -54,9 +57,10 @@ namespace NadinTest.Data.Repositories
             return res;
         }
 
-        public User Update(User user)
+     
+        public async Task<User> Update(User user)
         {
-            var res = GetById(user.Id);
+            var res =  await GetById(user.Id);
             DbContext.Users.Update(res);
             DbContext.SaveChanges();
             return res;

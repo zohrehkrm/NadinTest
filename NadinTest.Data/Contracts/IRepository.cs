@@ -1,4 +1,5 @@
 ﻿using NadinTest.Core.Models.Base;
+using NadinTest.Core.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace NadinTest.Data.Contracts
 {
     public interface IRepository
     {
-        Product Create(Product product);
-        List<Product> GetAll(Product product);
-        Product GetById(Product product);
-        Product Update(Product product);
-        void Delete(Product product);
+         Task<Product> Create(Product product);
+        Task<List<Product>> GetAll();
+        Task<Product> GetById(Guid Id);
+        Task Delete(Product product);
+        Task<Product> Update(Product product);
     }
 }
