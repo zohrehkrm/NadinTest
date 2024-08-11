@@ -3,7 +3,7 @@ using NadinTest.Core.Models.Users;
 using NadinTest.Data.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Text;
 using System.Threading.Tasks;
 
@@ -53,7 +53,7 @@ namespace NadinTest.Data.Repositories
         public async Task<Product> GetById(Guid Id)
         {
             var res = DbContext.Products.FirstOrDefault(x => x.Id == Id);
-            if (res == null)
+                if (res == null)
             {
                 throw new Exception("کالای مورد نظر یافت نشد.");
             }
