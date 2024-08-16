@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static NadinTest.Core.Models.Users.Role;
 
 
 namespace NadinTest.Data
@@ -16,6 +17,7 @@ namespace NadinTest.Data
     {
         public DbSet<Product> Products {  get; set; }
         public DbSet<User> Users {  get; set; }
+        public DbSet<Role> Roles {  get; set; }
         public ApplicationDbContext(DbContextOptions options)
         : base(options)
         {
@@ -30,6 +32,7 @@ namespace NadinTest.Data
 
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration( new UserConfiguration());
+            modelBuilder.ApplyConfiguration( new RoleConfiguration());
 
 
         }
