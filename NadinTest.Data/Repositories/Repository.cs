@@ -20,9 +20,20 @@ namespace NadinTest.Data.Repositories
 
         public async Task<Product> Create(Product product)
         {
-            DbContext.Products.Add(product);
-            DbContext.SaveChanges();
-            return product;
+            try
+            {
+                var exists =  DbContext.Products.Any(p => p.Id == product.Id);
+                if (exists)
+                    throw new Exception("شناسه تکراری است");
+
+                DbContext.Products.Add(product);
+                DbContext.SaveChanges();
+                return product;
+            }
+            catch(Exception ex) {
+                throw;
+            }
+           
         
         }
 

@@ -9,7 +9,7 @@ namespace NadinTest.Core.JWT
         public string token_type { get; set; }
         public int expires_in { get; set; }
 
-        public AccessToken(JwtSecurityToken securityToken)
+        public AccessToken(Microsoft.IdentityModel.Tokens.SecurityToken securityToken)
         {
             access_token = new JwtSecurityTokenHandler().WriteToken(securityToken);
             token_type = "Bearer";

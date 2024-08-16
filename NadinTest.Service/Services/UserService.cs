@@ -69,12 +69,11 @@ namespace NadinTest.Service.Services
         }
 
 
-        public async Task<string> CreateToken(string userName, string password, CancellationToken cancellationToken)
+        public async Task<AccessToken> CreateToken(string userName, string password, CancellationToken cancellationToken)
         {
             var user = await this.CheckPasswordByUserNameAsync(userName, password, cancellationToken);
-            var jwt = await jwtService.GenerateAsync(user);
-            return jwt;
-
+            return await jwtService.GenerateAsync(user);
+          
         }
         public async Task<User> FindByNameAsync(string userName, CancellationToken cancellationToken)
         {

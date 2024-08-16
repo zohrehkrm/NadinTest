@@ -10,6 +10,7 @@ using NadinTest.Service.Services;
 
 namespace NadinTest.Controllers.v1
 {
+    [Authorize]
     [ApiController]
     [Route("[Controller]")]
     public class UserController : ControllerBase 

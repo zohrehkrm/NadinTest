@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NadinTest.Core.JWT;
 using NadinTest.Core.Models.Users;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -17,11 +18,8 @@ namespace NadinTest.Service.Services
             this._config = _config;
         }
 
-        public async Task<string> GenerateAsync(User user)
+        public async Task<AccessToken> GenerateAsync(User user)
         {
-
-
-
             var claims = new[] {
                   new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                   new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -29,36 +27,28 @@ namespace NadinTest.Service.Services
                   new Claim("Id" , user.Id.ToString()),
                   new Claim("UserName" , user.UserName.ToString()),
                   new Claim("PassWord" , user.PassWord.ToString()),
-
-                 };
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                        _config["JwtSettings:Issuer"],
-                        _config["JwtSettings:Audience"],
-                        claims,
-                        expires: DateTime.Now.AddMinutes(20),
-                        signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-
-        }
-
-        public async Task<string> GenerateAsync2(User user)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(_config["JwtSettings:Issuer"],
-              _config["JwtSettings:Issuer"],
-              null,
-              expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            };
 
 
+            var secretKey = Encoding.UTF8.GetBytes("this is my custom Secret key for authentication"); // longer that 16 character
+            var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature);
+
+
+
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Issuer = _config["JwtSettings:Issuer"],
+                Audience = _config["JwtSettings:Audience"],
+                Expires = DateTime.Now.AddMinutes(600),
+                SigningCredentials = signingCredentials,
+
+                Subject = new ClaimsIdentity(claims)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.CreateToken(descriptor);
+
+            return new AccessToken(securityToken);
         }
 
     }

@@ -18,7 +18,7 @@ namespace NadinTest.Core.Infrastructure.Users
         /// <param name="password"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<string> CreateToken(string username, string password, CancellationToken cancellationToken);
+        Task<AccessToken> CreateToken(string username, string password, CancellationToken cancellationToken);
 
 
 
