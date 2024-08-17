@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
@@ -10,6 +11,7 @@ using NadinTest.Configuration;
 using NadinTest.Core;
 using NadinTest.Core.Infrastructure.Base;
 using NadinTest.Core.Infrastructure.Users;
+using NadinTest.Core.Models.Users;
 using NadinTest.Data;
 using NadinTest.Data.Contracts;
 using NadinTest.Data.Repositories;
@@ -25,6 +27,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
         option.UseSqlServer(builder.Configuration.GetConnectionString("sqlServer")));
+
+builder.Services.AddIdentity<User, Role>(optons =>
+{
+    optons.Password.RequiredLength = 5;
+    optons.Password.RequireNonAlphanumeric =false;
+    optons.Password.RequireDigit =false;
+    optons.Password.RequireUppercase =false;
+
+}
+
+).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 
 builder.Services.AddAuthentication(options =>

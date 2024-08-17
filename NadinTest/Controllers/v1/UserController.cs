@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Twitter;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NadinTest.Core.Infrastructure.Base;
 using NadinTest.Core.Infrastructure.Users;
@@ -16,10 +17,15 @@ namespace NadinTest.Controllers.v1
     public class UserController : ControllerBase 
     {
         private readonly IUserService Service;
+        private readonly UserManager<User> userManager ;
+        private readonly SignInManager<User> SignInManager;
 
-        public UserController(IUserService userService)
+        public UserController(IUserService userService, SignInManager<User> SignInManager, UserManager<User> userManager)
         {
-          Service = userService;
+            Service = userService;
+            this.userManager = userManager;
+            this.SignInManager = SignInManager;
+
         }
 
 
@@ -27,10 +33,38 @@ namespace NadinTest.Controllers.v1
         [HttpPost(Name = "PostUser")]
         public async Task<User> Add(User user)
         {
+           
             return await Service.Add(user);
         }
 
-      
+        public async Task<IActionResult> login(User user)
+        {
+
+            var _user = userManager.FindByNameAsync(user.UserName);
+            try
+            {
+                if (_user == null)
+                {
+                    var signInRes = await SignInManager.PasswordSignInAsync(user.UserName, user.PassWord, false, false);
+                    if (signInRes.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                         return  this.RedirectToAction("Index", "Home");    
+                    }
+                }
+
+            }
+            catch (Exception ex) {
+                return this.RedirectToAction("Index", "Home");
+            }
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+
 
         [HttpGet(Name = "GetUser")]
         public async Task<List<User>> GetAll()
